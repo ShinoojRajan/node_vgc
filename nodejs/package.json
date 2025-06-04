@@ -1,0 +1,22 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "nodejs sample application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "startjs": "node app.js",
+    "startts": "tsc && node dist/app.js",
+    "startts:js": "node ./dist/app.js",
+    "starttsApi": "tsc && node dist/api.js",
+    "startExpress": "tsc && node ./dist/express/app.js"
+  },
+  "author": "shinooj",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.21"
+  }
+}
