@@ -9,14 +9,22 @@
     "startts": "tsc && node dist/app.js",
     "startts:js": "node ./dist/app.js",
     "starttsApi": "tsc && node dist/api.js",
-    "startExpress": "tsc && node ./dist/express/app.js"
+    "startExpress": "tsc && node ./dist/express/app.js",
+    "startTodo": "tsc && node ./dist/todo/todoIndex.js"
   },
   "author": "shinooj",
   "license": "ISC",
   "dependencies": {
+    "@types/passport": "^1.0.17",
+    "@types/passport-http": "^0.3.11",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "passport": "^0.7.0",
+    "passport-http": "^0.3.0",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
+    "@types/express": "^5.0.2",
     "@types/node": "^22.15.21"
   }
 }

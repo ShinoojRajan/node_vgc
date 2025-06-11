@@ -9,6 +9,7 @@
     },
     "include": [
         "userTask/**/*",
-        "express/**/*"
+        "express/**/*",
+        "todo/**/*"
     ]
 }
