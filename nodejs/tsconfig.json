@@ -10,6 +10,7 @@
     "include": [
         "userTask/**/*",
         "express/**/*",
-        "todo/**/*"
+        "todo/**/*",
+        "testStudy/**/*"
     ]
 }

@@ -4,13 +4,14 @@
   "description": "nodejs sample application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "testScript": "echo \"Error: no test specified\" && exit 1",
     "startjs": "node app.js",
     "startts": "tsc && node dist/app.js",
     "startts:js": "node ./dist/app.js",
     "starttsApi": "tsc && node dist/api.js",
     "startExpress": "tsc && node ./dist/express/app.js",
-    "startTodo": "tsc && node ./dist/todo/todoIndex.js"
+    "startTodo": "tsc && node ./dist/todo/todoIndex.js",
+    "test": "jest"
   },
   "author": "shinooj",
   "license": "ISC",
@@ -25,6 +26,11 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.2",
-    "@types/node": "^22.15.21"
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.15.21",
+    "@types/supertest": "^6.0.3",
+    "jest": "^30.0.0",
+    "supertest": "^7.1.1",
+    "ts-jest": "^29.4.0"
   }
 }
