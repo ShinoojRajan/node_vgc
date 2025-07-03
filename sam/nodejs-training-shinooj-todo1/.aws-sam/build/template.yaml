@@ -1,0 +1,69 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'nodejs-training-shinooj-todo
+
+  Sample SAM Template for nodejs-training-shinooj-todo
+
+  '
+Globals:
+  Function:
+    Timeout: 3
+Resources:
+  ToDoFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ToDoFunction
+      Handler: todoIndex.main
+      Runtime: nodejs20.x
+      Architectures:
+      - x86_64
+      Events:
+        CreateTodo:
+          Type: Api
+          Properties:
+            Path: /todos
+            Method: post
+        GetTodo:
+          Type: Api
+          Properties:
+            Path: /todos
+            Method: get
+        UpdateTodo:
+          Type: Api
+          Properties:
+            Path: /todos/{id}
+            Method: put
+        DeleteTodo:
+          Type: Api
+          Properties:
+            Path: /todos/{id}
+            Method: delete
+      Environment:
+        Variables:
+          NODE_OPTIONS: ' --enable-source-maps'
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        EntryPoints:
+        - src\todoIndex.ts
+        Minify: true
+        Sourcemap: true
+        Target: es2020
+      SamResourceId: ToDoFunction
+Outputs:
+  ToDoApi:
+    Description: API Gateway endpoint URL for Prod stage for ToDo function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/todos/
+  ToDoFunction:
+    Description: ToDo Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - ToDoFunction
+      - Arn
+  ToDoFunctionIamRole:
+    Description: Implicit IAM Role created for ToDo function
+    Value:
+      Fn::GetAtt:
+      - ToDoFunctionRole
+      - Arn

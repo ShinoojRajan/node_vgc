@@ -1,0 +1,64 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  nodejs-training-shinooj-todo
+ 
+  Sample SAM Template for nodejs-training-shinooj-todo
+ 
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+ 
+Resources:
+  ToDoFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: todo-app/
+      Handler: todoIndex.main
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Events:
+        CreateTodo:
+          Type: Api
+          Properties:
+            Path: /todos
+            Method: post
+        GetTodo:
+          Type: Api
+          Properties:
+            Path: /todos
+            Method: get
+        UpdateTodo:
+          Type: Api
+          Properties:
+            Path: /todos/{id}
+            Method: put
+        DeleteTodo:
+          Type: Api
+          Properties:
+            Path: /todos/{id}
+            Method: delete
+    Metadata: # Manage esbuild properties
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: "es2020"
+        Sourcemap: true
+        EntryPoints:
+        - src\todoIndex.ts
+ 
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  ToDoApi:
+    Description: "API Gateway endpoint URL for Prod stage for ToDo function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/todos/"
+  ToDoFunction:
+    Description: "ToDo Lambda Function ARN"
+    Value: !GetAtt ToDoFunction.Arn
+  ToDoFunctionIamRole:
+    Description: "Implicit IAM Role created for ToDo function"
+    Value: !GetAtt ToDoFunctionRole.Arn
